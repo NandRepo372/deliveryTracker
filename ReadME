@@ -48,7 +48,7 @@ This service allows users to register packages, emit delivery status updates via
 ### Setup
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/delivery-tracker.git
+git clone https://github.com/NandRepo372/deliveryTracker.git
 cd delivery-tracker
 
 # Build the project

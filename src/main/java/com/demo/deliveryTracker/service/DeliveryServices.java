@@ -60,4 +60,20 @@ public class DeliveryServices {
         kafkaTemplate.send("delivery-Event", event);
         return ResponseEntity.ok("Event created successfully");
     }
+
+    public ResponseEntity<PackageResponse> getPackageDetails(Long packageId) {
+        //fetch package from DB
+        Packages packages = packagesRepository.findById(packageId)
+                .orElseThrow(() -> new RuntimeException("Package not found with ID: " + packageId));
+
+        //create response and return it
+        PackageResponse packageResponse = PackageResponse.builder()
+                .packageId(packages.getId())
+                .eventType(packages.getStatus())
+                .location(packages.getRecipientAddress())
+                .date(packages.getPickupDate())
+                .build();
+
+        return ResponseEntity.ok(packageResponse);
+    }
 }
