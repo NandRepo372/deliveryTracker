@@ -1,0 +1,58 @@
+# 🚚 Real-Time Delivery Tracker
+
+A lightweight backend service that tracks package delivery events in real time — like a mini logistics monitor for modern systems.
+
+---
+
+## 🧩 Project Overview
+
+This service allows users to register packages, emit delivery status updates via Kafka, and fetch real-time status from a relational database. Ideal for learning event-driven architecture and integrating Kafka with Spring Boot.
+
+---
+
+## 🔧 Tech Stack
+
+- **Spring Boot** – RESTful APIs for package registration and status retrieval
+- **Apache Kafka** – Streams delivery events like `Dispatched`, `Out for delivery`, `Delivered`
+- **SQL (MySQL/PostgreSQL/h2)** – Stores package metadata and current status
+- **Kafka Consumer** – Listens to delivery events and updates the database accordingly
+
+---
+
+## 🧪 Key Features
+
+| Endpoint              | Method | Description                                      |
+|-----------------------|--------|--------------------------------------------------|
+| `/packages`           | POST   | Register a new package with sender/recipient info |
+| `/events`             | POST   | Emit a Kafka event to update delivery status     |
+| `/packages/{id}`      | GET    | Fetch real-time delivery status from the database |
+
+---
+
+## 📦 Delivery Event Flow
+
+1. **Register Package** → Stored in SQL DB
+2. **Emit Event** → Kafka topic receives status update
+3. **Kafka Consumer** → Listens and updates DB with new status
+4. **Query Status** → API returns latest status from DB
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Java 17+
+- Kafka running locally or via Docker
+- MySQL or PostgreSQL instance
+
+### Setup
+```bash
+# Clone the repo
+git clone https://github.com/your-username/delivery-tracker.git
+cd delivery-tracker
+
+# Build the project
+./mvnw clean install
+
+# Run the app
+./mvnw spring-boot:run
